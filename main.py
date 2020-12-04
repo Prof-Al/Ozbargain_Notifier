@@ -10,7 +10,6 @@ def send_notification(message):
 
 
 OZBARGAIN_URL = "https://www.ozbargain.com.au"
-start = time.time()
 OZBARGAIN_DEALS_URL = "https://www.ozbargain.com.au/deals"
 response = requests.get(OZBARGAIN_DEALS_URL)
 
@@ -39,7 +38,6 @@ relevant_deals = [[title, post_time, vote, link]
                   for title, post_time, vote, link in zip(titles, time_since_posted, votes, links)
                   if 0 < post_time < 11]
 
-
 # Loops through all relevant deals to calculate whether the deal is especially good
 for deal in relevant_deals:
 
@@ -52,7 +50,3 @@ for deal in relevant_deals:
         send_notification("New Deal '{}'".format(deal[0]))
         send_notification("{} Upvotes in {} minutes!".format(deal[2], deal[1]))
         send_notification(OZBARGAIN_URL + deal[3])
-
-print(relevant_deals)
-
-print(time.time() - start)
